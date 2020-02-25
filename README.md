@@ -1,2 +1,2 @@
-# coding-exercises
-Created with CodeSandbox
+# ER coding exercises
+https://codesandbox.io/s/github/russoedu/coding-exercises
