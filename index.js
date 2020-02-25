@@ -13,6 +13,5 @@
 // require("./src/ex-13-reverse_linked_in_place.js");
 // require("./src/ex-14-sum_from_ll.js");
 // require("./src/ex-15-max_no_repeat.js");
-// require("./src/leetcode.js");
 
-require("./src/leetcode.js");
+require("./src/ex-16-find_median_in_sorted.js");
