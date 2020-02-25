@@ -24,14 +24,16 @@ var intToRoman = function(num) {
     
     for (const key of keys) {
         let keyNum = parseInt(key);
-        
+        // console.log(keyNum, num)
         while (num >= keyNum) {
             num -= keyNum;
+            // console.log(keyNum, num, hash[key])
             output.push(hash[key]);
         }
     }
     
     return output.join('');
-    
-    
 };
+
+const num = 1925
+console.log(intToRoman(num))
