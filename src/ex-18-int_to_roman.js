@@ -3,23 +3,35 @@
  * @return {string}
  */
 var intToRoman = function(num) {
-  const roman = [
-    ['', 'M', 'MM', 'MMM'],
-    ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
-    ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
-    ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'],
-  ]
-  num = ('0000' + (num.toString())).substr(num.toString().length);
-  console.log(num)
-  let result = '';
-  for (let i = 0; i < 4; i += 1) {
-    const current = typeof num[i] === 'undefined' ? 0 : Number(num[i])
-    console.log(current)
-    result += roman[i][current];
-  }
-
-  return result;
+    let hash = {
+        1000: 'M',
+        900: 'CM',
+        500: 'D',
+        400: 'CD',
+        100: 'C',
+        90: 'XC',
+        50: 'L',
+        40: 'XL',
+        10: 'X',
+        9: 'IX',
+        5: 'V',
+        4: 'IV',
+        1: 'I'
+    }
+    
+    let output = [];
+    let keys = Object.keys(hash).reverse();
+    
+    for (const key of keys) {
+        let keyNum = parseInt(key);
+        
+        while (num >= keyNum) {
+            num -= keyNum;
+            output.push(hash[key]);
+        }
+    }
+    
+    return output.join('');
+    
+    
 };
-
-const num = 9;
-console.log(intToRoman(num));
