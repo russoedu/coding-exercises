@@ -14,35 +14,33 @@ M             1000
  * @return {number}
  */
 function romanToInt(roman) {
-  const conv = {
-    'M': 1000,
-    'CM': 900,
-    'D': 500,
-    'CD': 400,
-    'C': 100,
-    'XC': 90,
-    'L': 50,
-    'XL': 40,
-    'X': 10,
-    'IX': 9,
-    'V': 5,
-    'IV': 4,
-    'I': 1
-  }
+  const conv = new Map()
+  conv.set('M', 1000),
+  conv.set('CM', 900)
+  conv.set('D', 500)
+  conv.set('CD', 400)
+  conv.set('C', 100)
+  conv.set('XC', 90)
+  conv.set('L', 50)
+  conv.set('XL', 40)
+  conv.set('X', 10)
+  conv.set('IX', 9)
+  conv.set('V', 5)
+  conv.set('IV', 4)
+  conv.set('I', 1)
+
   let num = 0
   let i = 0
 
   while(i < roman.length) {
     const double = roman[i] + roman[i + 1]
     const single = roman[i]
-    if (typeof conv[double] !== 'undefined') {
-      num += conv[double]
+    if (conv.has(roman[i] + roman[i + 1])) {
+      num += conv.get(roman[i] + roman[i + 1])
       i += 2
-    } else if (typeof conv[single] !== 'undefined') {
-      num += conv[single]
-      i += 1
     } else {
-      throw new Error('Not a roman number')
+      num += conv.get(roman[i])
+      i += 1
     }
   }
   console.log(num)
