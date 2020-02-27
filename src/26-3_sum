@@ -1,0 +1,56 @@
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+function threeSum(nums) {
+  // Sort the array and remove duplicates
+  nums.sort((a,b) => a - b)
+  const response = []
+
+  for (let i = 0; nums[i] <= 0; i ++) {
+    if (nums[i] === nums[i - 1]) {
+      continue
+    }
+    // Left goes from smaller to bigger numbers
+    let left = i + 1;
+    // Right goes frm bigger to smaller numbers
+    let right = nums.length - 1;
+    // RUn until they meet
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+      // Sum smaller than zero, so we try moving the left one step to "increase the sum"
+      if (sum < 0) {
+        left += 1
+      // Sum bugger than zero, so we try moving the right one step to "decrease the sum"
+      } else if (sum > 0) {
+        right -= 1
+      // Sum is zero. we add it to the result, move left and right all needed positions to eliminate the simmilar results and then move both pointers one position
+      } else {
+        response.push([nums[i], nums[left], nums[right]])
+        // Skip all similar numbers on the left
+        while (left < right && nums[left] === nums[left + 1]) {
+          left += 1
+        }
+        // Skip all similar numbers on the right
+        while (left < right && nums[right] === nums[right - 1]) {
+          right -= 1
+        }
+        left += 1
+        right -= 1
+      }
+    }
+  }
+
+  return response
+};
+
+/*
+Given array nums = [-1, 0, 1, 2, -1, -4],
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+*/
+const nums = [-1, 0, 1, 2, -1, -4]
+console.log(threeSum(nums))
