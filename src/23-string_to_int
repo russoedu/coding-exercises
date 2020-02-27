@@ -1,0 +1,42 @@
+/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+  str = str.trim()
+  var isNegative = false
+  var hasStart = false
+  var result = 0
+  const MAX = (2 ** 31) - 1
+  const MIN = -(2 ** 31)
+
+  for (i = 0; i < str.length; i++) {
+    if (!hasStart) {
+      if (str[i] === "-") {
+        isNegative = true;
+        hasStart = true;
+        continue;
+      } else if (str[i] === "+") {
+        hasStart = true;
+        continue;
+      } else if (parseInt(str[i]) >= 0) {
+        hasStart = true;
+        result = parseInt(str[i])
+        continue;
+      }
+      return 0;
+    } else {
+      // parseInt not Number(), because the latter will turn " " into 0.
+      if (parseInt(str[i]) >= 0) {
+        result = result * 10 + parseInt(str[i]);
+      } else {
+        break;
+      }
+    }
+  }
+  return isNegative ? Math.max(MIN, - result) : Math.min(MAX, result)
+};
+
+const str = "2147483648"
+//           999999999
+console.log(myAtoi(str))
